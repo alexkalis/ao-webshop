@@ -16,5 +16,13 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'PagesController@index');
+Route::get('/about', 'PagesController@about');
+Route::get('/contact', 'PagesController@contact');
+//Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/about', function() {
+  // return view('pages.about');
+// });
+// Route::get('/users/{id}', function($id) {
+//   return 'This  is user: ' .$id;
+// });
