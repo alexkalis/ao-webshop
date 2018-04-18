@@ -18,6 +18,7 @@
                       <li><a href="/contact">Contact</a></li>
                       <li><a href="/categories">Categories</a></li>
                       <li><a href="/products">Products</a></li>
+                      <li><a href="/shoppingCart">Shopping Cart</a></li>
                     </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">

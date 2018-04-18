@@ -47,8 +47,10 @@ class CategoriesController extends Controller
      */
     public function show($id)
     {
-      $cat_prd = Categories::all()->load('products');
-      return view('categories.show')->with('cat_prd', $cat_prd);
+      $category = \App\Categories::find($id);
+      $products = $category->product;
+      // $cat_prd = Categories::all()->load('product');
+      return view('categories.show', ['products' => $products]);
     }
 
     /**

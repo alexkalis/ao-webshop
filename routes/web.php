@@ -22,6 +22,7 @@ Route::get('/contact', 'PagesController@contact');
 
 Route::resource('products', 'ProductsController');
 Route::resource('categories', 'CategoriesController');
+Route::get('/category/{id}', 'CategoriesController@show')->name('category');
 
 //Route::get('/home', 'HomeController@index')->name('home');
 // Route::get('/about', function() {

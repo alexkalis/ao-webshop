@@ -5,6 +5,7 @@
       <h3>{{$product->description}}</h3>
       <h3>€{{$product->price}}</h3>
       <br><br>
+      <a href="/cart">Add to cart</a>
   <hr>
   </hr>
   <hr>

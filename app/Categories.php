@@ -9,7 +9,7 @@ class Categories extends Model
   /*
   *The product that belongs to the category
   */
-  public function products() {
-      return $this->belongsToMany('App\Products', 'product_categories', 'category_id','product_id');
+  public function product() {
+      return $this->belongsToMany('App\Products');
   }
 }
