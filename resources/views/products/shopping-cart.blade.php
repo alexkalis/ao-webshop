@@ -1,3 +1,9 @@
+<!--
+this is the cart view.
+it gets it's $variables from the ProductsController.
+it shows what's in your shoppingCart.
+-->
+
 @extends('layouts.app')
 @section('content')
   @if(Session::has('cart'))

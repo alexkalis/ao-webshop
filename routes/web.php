@@ -37,6 +37,7 @@ Route::get('/to-database', [
   'uses' =>'ProductsController@toDatabase',
   'as' => 'product.added'
 ]);
+
 Route::group(['prefix' =>'user'], function() {
   Route::group(['middleware' => 'guest'] ,function() {
     Route::get('/signup', [
@@ -56,6 +57,8 @@ Route::group(['prefix' =>'user'], function() {
       'as' => 'user.singin'
     ]);
   });
+
+
   Route::group(['middleware' => 'auth'] ,function() {
   Route::get('/profile', [
     'uses' => 'UserController@getProfile',

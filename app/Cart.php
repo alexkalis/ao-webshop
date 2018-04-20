@@ -7,8 +7,8 @@ class Cart
 {
 
   /*
-  *make varaibles
-  *if this class is called the the construct wil check if there already is a cat if so add new items to old cart if not add items to new Cart
+  *make variable
+  *if this class is called the the construct wil check if there already is a cart if so add new items to old cart if not add items to new Cart
   *add a new item with the qty price and the item itself into the stored item variable.
   *then at the end the stored item gets put into the original items variable up top.
   */
@@ -23,6 +23,12 @@ class Cart
         $this->totalPrice = $oldCart->totalPrice;
       }
     }
+    /*
+    *this function is called add and this function is used in the products controller.
+    *you make a new variable called storeditem and in that you put in the qunatity from the storeditems , then you get the price from the item and you get the item itself.
+    *if the variable id and this->items exist then you need to store that into the $storedItem variable
+    *
+    */
     public function add($item, $id) {
       $storedItem = ['qty' => 0, 'price' => $item->price, 'item' => $item];
       if($this->items){
@@ -30,6 +36,14 @@ class Cart
           $storedItem = $this->items[$id];
         }
       }
+      /*
+      *the first one adds 1 and stores it into the array object qty
+      *the second one calculates the price and stores it into the array object price
+      *then the storeditem gets put into the public $items up above.
+      *the totalQty gets plus numbers from the storeditem.
+      *the += adds the item->price to the totalprice.
+      */
+
       $storedItem['qty']++;
       $storedItem['price'] = $item->price * $storedItem['qty'];
       $this->items[$id] = $storedItem;
