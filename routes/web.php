@@ -29,14 +29,29 @@ Route::get('/add-to-cart/{id}', [
   'uses' => 'ProductsController@getAddToCart',
   'as' => 'product.addToCart'
 ]);
+Route::get('/reduce/{id}', [
+  'uses' => 'ProductsController@reduceByOne',
+  'as' => 'product.reduceByOne'
+]);
+Route::get('/remove/{id}', [
+  'uses' => 'ProductsController@removeItem',
+  'as' => 'product.remove'
+]);
+Route::get('/add/{id}', [
+  'uses' => 'ProductsController@addItem',
+  'as' => 'product.add'
+]);
 Route::get('/shopping-cart', [
   'uses' => 'ProductsController@getCart',
   'as' => 'product.shoppingCart'
 ]);
 Route::get('/to-database', [
   'uses' =>'ProductsController@toDatabase',
-  'as' => 'product.added'
+  'as' => 'product.added',
+  'middleware' => 'auth'
 ]);
+
+
 
 Route::group(['prefix' =>'user'], function() {
   Route::group(['middleware' => 'guest'] ,function() {
@@ -59,6 +74,7 @@ Route::group(['prefix' =>'user'], function() {
   });
 
 
+
   Route::group(['middleware' => 'auth'] ,function() {
   Route::get('/profile', [
     'uses' => 'UserController@getProfile',
@@ -68,10 +84,17 @@ Route::group(['prefix' =>'user'], function() {
       'uses' => 'UserController@getLogout',
       'as' => 'user.logout'
     ]);
-  } );
+  });
+
+
 Route::get('login', function () { return redirect('user/signin'); })->name('login');
 });
 
+
+Route::get('/added', [
+  'uses' => 'ProductsController@toDatabase',
+  'as' => 'order.added'
+]);
 
 
 Route::resource('products', 'ProductsController');

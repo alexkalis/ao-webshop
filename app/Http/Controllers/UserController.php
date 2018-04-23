@@ -64,9 +64,17 @@ class UserController extends Controller
     }
     /*
     *this shows the profile page when you click on the profile link.
+    *it also gets the unserialized cart from the database and gives it to the $orders which gets given to the user.profile page.
     */
     public function getProfile() {
-      return view('user.profile');
+      $orders = Auth::user()->orders;
+      $orders->transform(function($order, $key) {
+        $order->cart = unserialize($order->cart);
+        return $order;
+      });
+      // dd($orders);
+      return view('user.profile', ['orders' => $orders]);
+
     }
     /*
     *This logs you out.

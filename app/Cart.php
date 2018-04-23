@@ -50,4 +50,32 @@ class Cart
       $this->totalQty++;
       $this->totalPrice += $item->price;
     }
+    /*
+    *this removes one item in the current item group.
+    *it also takes of the price of that item.
+    *then it gets taken off the list of all items and of the total price varaible
+    *the last thing checks if the value is smaller than 0 then it gets deleted
+    */
+    public function reduceByOne($id) {
+      $this->items[$id]['qty']--;
+      $this->items[$id]['price'] -= $this->items[$id]['item']['price'];
+      $this->totalQty--;
+      $this->totalPrice-= $this->items[$id]['item']['price'];
+
+      if($this->items[$id]['qty'] <= 0) {
+        unset($this->items[$id]);
+      }
+
+    }
+    /*
+    *this removes all items in the current item group.
+    *it also takes of the price of those items.
+    *then it gets taken off the list of all items and of the total price variable
+    *then it the group gets deleted.
+    */
+    public function removeItem($id) {
+      $this->totalQty -= $this->items[$id]['qty'];
+      $this->totalPrice-= $this->items[$id]['price'];
+      unset($this->items[$id]);
+    }
 }

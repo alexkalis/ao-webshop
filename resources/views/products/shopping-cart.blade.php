@@ -16,12 +16,13 @@ it shows what's in your shoppingCart.
               <strong>{{$product['item'] ['name']}}</strong>
               <span class="label label-success">{{$product['price']}}</span>
               <div class="btn-group">
-                <button class="btn btn-primary btn-xs dropdown-toggle" type="button" name="button" data-toggle="dropdown">Action <span class="caret"> </span> </button>
+                <button class="btn btn-primary btn-xs dropdown-toggle" type="button" data-toggle="dropdown">Action <span class="caret"></span> </button>
                  <ul class="dropdown-menu">
-                   <li><a href="">reduce by 1</li>
-                     <li><a href="">reduce all</li>
+                   <li><a href="{{route('product.reduceByOne', ['id' =>$product['item']['id']])}}">reduce by 1</a></li>
+                   <li><a href="{{route('product.remove', ['id' =>$product['item']['id']])}}">reduce all</a></li>
+                   <li><a href="{{route('product.add', ['id' =>$product['item']['id']])}}">add by one</a></li>
                  </ul>
-              </div
+              </div>
             </li>
           @endforeach
       </ul>
@@ -29,7 +30,8 @@ it shows what's in your shoppingCart.
   </div>
   <div class="row">
     <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-      <strong>Total: {{$totalPrice}}</strong>
+      <strong>totale prijs: € {{$totalPrice}}</strong>
+      <strong>totale producten: {{$totalQty}}</strong>
   </div>
 </div>
 <hr>
@@ -41,7 +43,7 @@ it shows what's in your shoppingCart.
 @else
   <div class="row">
     <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-      <h2>no items in cart</h2>
+      <h2>Geen producten in de winkel wagen</h2>
   </div>
   </div>
 @endif
