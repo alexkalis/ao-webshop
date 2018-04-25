@@ -12,9 +12,9 @@ class Cart
   *add a new item with the qty price and the item itself into the stored item variable.
   *then at the end the stored item gets put into the original items variable up top.
   */
-    public $items = null;
-    public $totalQty = 0;
-    public $totalPrice = 0;
+    public $items ;
+    public $totalQty ;
+    public $totalPrice ;
 
     public function __construct($oldCart) {
       if ($oldCart) {

@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use App\Products;
 use Auth;
+
+
 class UserController extends Controller
 {
 
@@ -68,13 +70,13 @@ class UserController extends Controller
     */
     public function getProfile() {
       $orders = Auth::user()->orders;
-      $orders->transform(function($order, $key) {
-        $order->cart = unserialize($order->cart);
-        return $order;
-      });
-      // dd($orders);
-      return view('user.profile', ['orders' => $orders]);
-
+      $orderDetails = [];
+      foreach ($orders as $order) {
+        foreach ($order->details()->get() as $ord) {
+          $orderDetails[] = $ord;
+        }
+      }
+      return view('user.profile',  ['orderDetails' => $orderDetails]);
     }
     /*
     *This logs you out.

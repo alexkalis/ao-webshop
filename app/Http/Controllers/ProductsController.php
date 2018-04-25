@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Cart;
 use Auth;
 use App\Order;
+use App\OrderDetails;
 use App\Products;
 use App\Categories;
 use Session;
@@ -130,13 +131,21 @@ class ProductsController extends Controller
     public function toDatabase() {
       $oldCart = Session::get('cart');
       $cart = new Cart($oldCart);
-      $order = new Order();
-      $order->cart = serialize($cart);
+      $items = $cart->items;
+      $order = Order::create([
+        'user_id' => Auth::user()->id,
+      ]);
+      // $order->cart = serialize($cart);
+      foreach ($items as $item) {
+        OrderDetails::create([
+          'order_id' => $order->id,
+          'product_id' => $item['item']->id,
+          'quantity' =>$item['qty'],
 
-      Auth::user()->orders()->save($order);
+        ]);
+      }
       Session::forget('cart');
-      return view('user.profile');
-
+      return redirect('user/profile');
     }
   }
     /**
