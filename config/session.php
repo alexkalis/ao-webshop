@@ -9,7 +9,7 @@ return [
     |
     | This option controls the default session "driver" that will be used on
     | requests. By default, we will use the lightweight native driver but
-    | you may specify any of the other wonderful drivers provided here.
+    | y ou may specify any of the other wonderful drivers provided here.
     |
     | Supported: "file", "cookie", "database", "apc",
     |            "memcached", "redis", "array"
@@ -29,9 +29,9 @@ return [
     |
     */
 
-    'lifetime' => env('SESSION_LIFETIME', 120),
-
+    'lifetime' => 1,
     'expire_on_close' => true,
+    'expired-session-redirect' => url(env('APP_URL')),
 
     /*
     |--------------------------------------------------------------------------

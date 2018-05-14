@@ -24,8 +24,8 @@
                         </a>
                     </li>
                       @if(Auth::check())
-                        <li><a href="{{route('user.profile')}}">User profile</a></li>
-                          <li><a href="{{route('user.logout')}}">log out</a></li>
+                        <li><a class="nav-link" href="{{route('user.profile')}}">User profile</a></li>
+                          <li><a class="nav-link" href="{{route('user.logout')}}">log out</a></li>
                       @else
                         <li><a href="{{route('user.signup')}}">Signup</a></li>
                         <li><a href="{{route('user.signin')}}">Signin</a></li>

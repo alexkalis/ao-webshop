@@ -125,9 +125,14 @@ class ProductsController extends Controller
     *get the cart from the session
     *the $cart gets the cart from $oldcart
     *$order gets the relationship onetomany from the Order model.
-    *then it makes it so the cart is changed into something that can be put into the database
-    *then it saves the cart with the user into the database.
+    *$order makes it so that when a user is logged in you can put something to the database.
+    *then it foreaches the items from the cart and those items get put into the OrderDetails table wth the order id, item id and the quantity.
+    *then it saves the cart with the user into the database to the OrderDetails table
+    *then the session forgets the cart
+    *And goes back to the user.profile.
     */
+
+
     public function toDatabase() {
       $oldCart = Session::get('cart');
       $cart = new Cart($oldCart);

@@ -61,7 +61,7 @@ Route::group(['prefix' =>'user'], function() {
     ]);
     Route::post('/signup', [
       'uses' => 'UserController@postSignup',
-      'as' => 'user.singin'
+      'as' => 'user.singup'
     ]);
     Route::get('/signin', [
       'uses' => 'UserController@getSignin',
@@ -72,6 +72,7 @@ Route::group(['prefix' =>'user'], function() {
       'as' => 'user.singin'
     ]);
   });
+});
 
 
 
@@ -85,12 +86,6 @@ Route::group(['prefix' =>'user'], function() {
       'as' => 'user.logout'
     ]);
   });
-
-
-Route::get('login', function () { return redirect('user/signin'); })->name('login');
-});
-
-
 Route::get('/added', [
   'uses' => 'ProductsController@toDatabase',
   'as' => 'order.added'

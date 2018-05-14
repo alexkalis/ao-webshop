@@ -67,7 +67,14 @@ class UserController extends Controller
     /*
     *this shows the profile page when you click on the profile link.
     *it also gets the unserialized cart from the database and gives it to the $orders which gets given to the user.profile page.
+    *Get the the order from a ligged in user.
+    *makes a empty array.
+    *foreach de orders in de order tabel.
+    *en foreach dan de orders die in de order details staan em zet die in  de array: orderDetails
+    *geef dan de profile page terug.
     */
+
+
     public function getProfile() {
       $orders = Auth::user()->orders;
       $orderDetails = [];
@@ -82,7 +89,7 @@ class UserController extends Controller
     *This logs you out.
     */
     public function getLogout() {
-      Auth::logout();
+      Auth::logout(1);
       return redirect()->back();
     }
 }
