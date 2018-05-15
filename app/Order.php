@@ -4,8 +4,6 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-
-
 class Order extends Model
 {
   /*
@@ -14,6 +12,7 @@ class Order extends Model
   protected $fillable = [
       'user_id',
   ];
+
   /*
   *this connects the user table to the order table with a one to many relationship
   *
@@ -23,7 +22,7 @@ class Order extends Model
     }
     /*
     *this connects the OrderDetails table to the order table with a has many relationship
-    *
+    *one order can have multiple details.
     */
     public function details() {
       return $this->hasMany('App\OrderDetails', 'order_id');

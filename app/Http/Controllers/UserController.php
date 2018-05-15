@@ -79,6 +79,7 @@ class UserController extends Controller
       $orders = Auth::user()->orders;
       $orderDetails = [];
       foreach ($orders as $order) {
+        // dd($orders);
         foreach ($order->details()->get() as $ord) {
           $orderDetails[] = $ord;
         }
@@ -89,7 +90,7 @@ class UserController extends Controller
     *This logs you out.
     */
     public function getLogout() {
-      Auth::logout(1);
+      Auth::logout();
       return redirect()->back();
     }
 }

@@ -18,6 +18,10 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <ul class="list-group">
+            {{--
+            $detail->product() is de product function/method in the orderDetails model.
+
+            --}}
         @foreach ($orderDetails as $detail)
                 <hr>
                 <h2>Dit is van bestelling: {{$detail->order_id}}</h2>
@@ -25,7 +29,8 @@
                 <h2>Bestelde product:{{$detail->product()->first()->name}}</h2>
                 <h2>Zo vaak is het besteld: {{$detail->quantity}}</h2>
                 <br>
-                <h2> en dit was de price: {{$detail->product()->first()->price}}</h2>
+                <h2> en dit was de price per product: {{$detail->product()->first()->price}}</h2>
+                {{-- <h2>{{$detail->quantity * $detail->product()->first()->price}}</h2> --}}
         @endforeach
           </ul>
         </div>
@@ -34,7 +39,7 @@
         </div>
       </div>
 
-  @else
+    @else
     <h2>De orders zijn leeg</h2>
       @endif
   </div>

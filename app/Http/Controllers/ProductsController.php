@@ -24,8 +24,16 @@ class ProductsController extends Controller
       $prds = Products::orderBy('created_at', 'desc')->paginate(10);
     return view('products.index')->with('prds', $prds);
     }
+    /*
+    *This gets the id(product) from the url and then gives this to the show view which shows the details of the product.
+    *In $products all the data(from products) is gotten from the table(products) with the correct id that is gotten from the url.
+    *then it gives the $products to the view(products.show) using an array: ['products' => $products].
+    *
+    *
+    *
+    */
     public function show($id) {
-      $products = \App\Products::find($id);
+      $products = Products::find($id);
       // $cat_prd = Categories::all()->load('product');
       return view('products.show', ['products' => $products]);
     }
@@ -39,7 +47,7 @@ class ProductsController extends Controller
     *the $cart->add puts the new id(product,price) into the cart.
     *$request->session puts the the cart into the session.
     */
-    public function getAddToCart(Request $request, $id) {
+    public function addToCart(Request $request, $id) {
       $product = Products::find($id);
       $oldCart = Session::has('cart') ? Session::get('cart') : null;
       $cart = new Cart($oldCart);
@@ -74,7 +82,7 @@ class ProductsController extends Controller
 
     /*
     *This function removes an whole product even if there are a large amount of them
-    *checks if sessio has cart
+    *checks if session has cart
     *makes a new cart
     *removes all the items and that function is gotten from the cart model.
     *the if checks if there are any other items in the cart if not then it will forget the session and show: there are no items or whatever you text you have put into the shopping cart file.
@@ -146,11 +154,10 @@ class ProductsController extends Controller
           'order_id' => $order->id,
           'product_id' => $item['item']->id,
           'quantity' =>$item['qty'],
-
         ]);
       }
       Session::forget('cart');
-      return redirect('user/profile');
+      return redirect('profile');
     }
   }
     /**

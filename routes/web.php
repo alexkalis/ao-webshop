@@ -22,29 +22,46 @@ Route::get('/contact', 'PagesController@contact');
 
 /*
 * sign in and up pages routes
+*this gets the route to add something to the cart with an specific id.
 *
 */
 
 Route::get('/add-to-cart/{id}', [
-  'uses' => 'ProductsController@getAddToCart',
+  'uses' => 'ProductsController@addToCart',
   'as' => 'product.addToCart'
 ]);
+/*
+*this gets the route to the reduce an item by one from the shopping cart with an specific id.
+*
+*/
 Route::get('/reduce/{id}', [
   'uses' => 'ProductsController@reduceByOne',
   'as' => 'product.reduceByOne'
 ]);
+/*
+*this gets the route to remove an item from the shopping cart with an specific id.
+*/
 Route::get('/remove/{id}', [
   'uses' => 'ProductsController@removeItem',
   'as' => 'product.remove'
 ]);
+/*
+*this gets the route to add an item to the shopping cart from the products with the specific id.
+*/
 Route::get('/add/{id}', [
   'uses' => 'ProductsController@addItem',
   'as' => 'product.add'
 ]);
+/*
+*this gets the route to show the shoppingcart in the shopping cart with the products that are put in the session/shoppingcart.
+*/
 Route::get('/shopping-cart', [
   'uses' => 'ProductsController@getCart',
   'as' => 'product.shoppingCart'
 ]);
+/*
+*this gets the route to put the order in to the database and
+*/
 Route::get('/to-database', [
   'uses' =>'ProductsController@toDatabase',
   'as' => 'product.added',
@@ -95,7 +112,7 @@ Route::get('/added', [
 Route::resource('products', 'ProductsController');
 Route::resource('categories', 'CategoriesController');
 Route::get('/category/{id}', 'CategoriesController@show')->name('category');
-
+Route::resource('reviews', 'ReviewController');
 //Route::get('/home', 'HomeController@index')->name('home');
 // Route::get('/about', function() {
   // return view('pages.about');
