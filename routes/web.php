@@ -113,6 +113,8 @@ Route::resource('products', 'ProductsController');
 Route::resource('categories', 'CategoriesController');
 Route::get('/category/{id}', 'CategoriesController@show')->name('category');
 Route::resource('reviews', 'ReviewController');
+Route::get('login', function () { return redirect('user/signin'); })->name('login');
+Route::get('register', function () { return redirect('user/signup'); })->name('register');
 //Route::get('/home', 'HomeController@index')->name('home');
 // Route::get('/about', function() {
   // return view('pages.about');
