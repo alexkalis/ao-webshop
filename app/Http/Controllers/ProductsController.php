@@ -46,6 +46,8 @@ class ProductsController extends Controller
     *$cart makes a new cart withthe oldcart variable from the line before that(goes throught the $oldcart again)
     *the $cart->add puts the new id(product,price) into the cart.
     *$request->session puts the the cart into the session.
+    *The ? and : on the 2nd line of the function is an if else statement.
+    *on line 4 it makes a new cart with the oldcart inside, if there is no oldcart it will make a brandnew cart.
     */
     public function addToCart(Request $request, $id) {
       $product = Products::find($id);

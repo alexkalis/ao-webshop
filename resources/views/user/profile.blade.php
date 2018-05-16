@@ -7,7 +7,7 @@
     <h2>My orders</h2>
 
     {{--
-    --this $orders it gets from the user controller and in it is the cart unserialized
+    --this $orderDetails it gets from the user controller and from there it gets send to here.
     --
     --
     --}}
@@ -19,8 +19,8 @@
         <div class="panel-body">
           <ul class="list-group">
             {{--
-            $detail->product() is de product function/method in the orderDetails model.
-
+            --$detail->product() is de product function/method in the orderDetails model.
+            --$detail->product goes from user controller gets it from order model and that gets it from orderdetails model
             --}}
         @foreach ($orderDetails as $detail)
                 <hr>

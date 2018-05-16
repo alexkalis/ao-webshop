@@ -29,7 +29,7 @@ class User extends Authenticatable
     /*
     *the orders function makes a relationship with the order table.
     this says that a user can have multiple orders but an order can not have multiple users.
-    *òne user can have many orders. 
+    *òne user can have many orders.
 
     */
     public function orders() {
