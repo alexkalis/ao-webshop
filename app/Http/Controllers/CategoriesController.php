@@ -26,7 +26,7 @@ class CategoriesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    { 
+    {
       // $category_name = DB::table('categories')->select('id', $id)->get();
       $category = Categories::find($id);
       $products = $category->product;
