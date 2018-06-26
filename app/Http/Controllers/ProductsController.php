@@ -22,7 +22,7 @@ class ProductsController extends Controller
     public function index()
     {
       $prds = Products::orderBy('created_at', 'desc')->paginate(10);
-      return view('products.index')->with('prds', $prds);
+      return view('products.index', ['prds' => $prds]);
     }
     /*
     *This gets the id(product) from the url and then gives this to the show view which shows the details of the product.

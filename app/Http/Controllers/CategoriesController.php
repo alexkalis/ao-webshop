@@ -34,4 +34,5 @@ class CategoriesController extends Controller
       // , 'category' => $category_name
       return view('categories.show', ['products' => $products]);
     }
+
 }

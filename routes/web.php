@@ -30,6 +30,7 @@ Route::get('/add-to-cart/{id}', [
   'uses' => 'ProductsController@addToCart',
   'as' => 'product.addToCart'
 ]);
+
 /*
 *this gets the route to the reduce an item by one from the shopping cart with an specific id.
 *

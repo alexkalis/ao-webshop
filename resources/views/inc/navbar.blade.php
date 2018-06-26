@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="{{URL::asset('css/css.css')}}">
   <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -9,11 +10,9 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
 
-                    </ul>
-                    <ul class="nav navbar-nav">
-                    <li><a href="/">Home</a></li>
+                    <ul class="nav navbar-nav" style="line-height:;">
+                    <li style="margin-right:20px;"><a href="/">Home</a></li>
                     <li><a href="/about">About</a></li>
                     <li><a href="/contact">Contact</a></li>
                     <li><a href="/categories">Categories</a></li>
@@ -25,18 +24,12 @@
                         </a>
                     </li>
                       @if(Auth::check())
-                          <li><a class="nav-link" href="{{route('user.profile')}}">User profile</a></li>
+                            <li><a class="nav-link" href="{{route('user.profile')}}">User profile</a></li>
                           <li><a class="nav-link" href="{{route('user.logout')}}">log out</a></li>
                       @else
                         <li><a href="{{route('user.signup')}}">Signup</a></li>
                         <li><a href="{{route('user.signin')}}">Signin</a></li>
                       @endif
-
-
-
                     </ul>
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
                 </div>
               </div>
