@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Http\Request;
 use App\Products;
+use Auth;
 use Session;
 class Cart
 {
@@ -97,6 +98,43 @@ class Cart
         $cart = new Cart($oldCart);
         return $cart;
     }
+    public function reduceItemModel($id) {
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->reduceByOne($id);
+        if ( count($cart->items) > 0) {
+            Session::put('cart', $cart);
+        } else {
+          Session::forget('cart');
+        }
+    }
+    public function removeItemModel($id) {
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->removeItem($id);
 
+        if ( count($cart->items) > 0) {
+            Session::put('cart', $cart);
+        } else {
+          Session::forget('cart');
+        }
+    }
+    public function toDatabaseModel() {
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        $items = $cart->items;
+        $order = Order::create([
+          'user_id' => Auth::user()->id,
+        ]);
+        // $order->cart = serialize($cart);
+        foreach ($items as $item) {
+          OrderDetails::create([
+            'order_id' => $order->id,
+            'product_id' => $item['item']->id,
+            'quantity' =>$item['qty'],
+          ]);
+        }
+        Session::forget('cart');
+    }
 
 }

@@ -65,15 +65,8 @@ class ProductsController extends Controller
     *then it reloads the shopping cart with the item(s) removed.
     */
     public function reduceByOne($id) {
-      $oldCart = Session::has('cart') ? Session::get('cart') : null;
-      $cart = new Cart($oldCart);
-      $cart->reduceByOne($id);
-      if ( count($cart->items) > 0) {
-          Session::put('cart', $cart);
-      } else {
-        Session::forget('cart');
-      }
-
+      $test = new Cart;
+      $test->reduceItemModel($id);
       return redirect()->route('product.shoppingCart');
     }
 
@@ -87,15 +80,8 @@ class ProductsController extends Controller
     *then it reloads the shopping cart with the items removed.
     */
     public function removeItem($id) {
-      $oldCart = Session::has('cart') ? Session::get('cart') : null;
-      $cart = new Cart($oldCart);
-      $cart->removeItem($id);
-
-      if ( count($cart->items) > 0) {
-          Session::put('cart', $cart);
-      } else {
-        Session::forget('cart');
-      }
+      $test = new Cart;
+      $test->removeItemModel($id);
       return redirect()->route('product.shoppingCart');
     }
 /*
@@ -104,11 +90,8 @@ class ProductsController extends Controller
 *
 */
     public function addItem(Request $request,$id) {
-      $product = Products::find($id);
-      $oldCart = Session::has('cart') ? Session::get('cart') : null;
-      $cart = new Cart($oldCart);
-      $cart->add($product, $product->id);
-      $request->session()->put('cart',$cart);
+      $test = new Cart;
+        $test->addItemModel($request,$id);
       return redirect()->route('product.shoppingCart');
     }
     /*
@@ -137,21 +120,8 @@ class ProductsController extends Controller
 
 
     public function toDatabase() {
-      $oldCart = Session::get('cart');
-      $cart = new Cart($oldCart);
-      $items = $cart->items;
-      $order = Order::create([
-        'user_id' => Auth::user()->id,
-      ]);
-      // $order->cart = serialize($cart);
-      foreach ($items as $item) {
-        OrderDetails::create([
-          'order_id' => $order->id,
-          'product_id' => $item['item']->id,
-          'quantity' =>$item['qty'],
-        ]);
-      }
-      Session::forget('cart');
+     $test = new Cart;
+     $test->toDatabaseModel();
       return redirect('profile');
     }
   }
