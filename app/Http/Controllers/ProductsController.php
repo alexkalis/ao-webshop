@@ -50,14 +50,10 @@ class ProductsController extends Controller
     *on line 4 it makes a new cart with the oldcart inside, if there is no oldcart it will make a brandnew cart.
     */
     public function addToCart(Request $request, $id) {
-      $product = Products::find($id);
-      $oldCart = Session::has('cart') ? Session::get('cart') : null;
-      $cart = new Cart($oldCart);
-      $cart->add($product,$product->id);
-
-      $request->session()->put('cart',$cart);
-      // dd($request->session()->get('cart'));
+      $test = new Cart;
+      $test->cartGet($request,$id);
       return redirect()->route('products.index');
+      // dd($request->session()->get('cart'));
     }
 
     /*

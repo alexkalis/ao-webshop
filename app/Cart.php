@@ -1,8 +1,10 @@
- <?php
+<?php
 
 namespace App;
 
-
+use Illuminate\Http\Request;
+use App\Products;
+use Session;
 class Cart
 {
 
@@ -16,7 +18,7 @@ class Cart
     public $totalQty;
     public $totalPrice;
 
-    public function __construct($oldCart) {
+    public function __construct($oldCart = []) {
       if ($oldCart) {
         $this->items = $oldCart->items;
         $this->totalQty = $oldCart->totalQty;
@@ -78,4 +80,16 @@ class Cart
       $this->totalPrice-= $this->items[$id]['price'];
       unset($this->items[$id]);
     }
+
+    public function cartGet(Request $request, $id) {
+        $product = Products::find($id);
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->add($product,$product->id);
+
+        $request->session()->put('cart',$cart);
+    }
+
+
+
 }
