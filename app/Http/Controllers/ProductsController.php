@@ -51,7 +51,7 @@ class ProductsController extends Controller
     */
     public function addToCart(Request $request, $id) {
       $test = new Cart;
-      $test->cartGet($request,$id);
+      $test->addItemModel($request,$id);
       return redirect()->route('products.index');
       // dd($request->session()->get('cart'));
     }
@@ -120,12 +120,9 @@ class ProductsController extends Controller
     *
     */
       public function getCart() {
-      if (!Session::has('cart')) {
-        return view('products.shopping-cart');
-      }
-      $oldCart = Session::get('cart');
-      $cart = new Cart($oldCart);
-      return view('products.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice, 'totalQty' => $cart->totalQty]);
+          $test = new Cart;
+          $cart = $test->getCartModel();
+          return view('products.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice, 'totalQty' => $cart->totalQty]);
     }
     /*
     *get the cart from the session

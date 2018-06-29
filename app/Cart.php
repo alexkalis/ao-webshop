@@ -81,7 +81,7 @@ class Cart
       unset($this->items[$id]);
     }
 
-    public function cartGet(Request $request, $id) {
+    public function addItemModel(Request $request, $id) {
         $product = Products::find($id);
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
@@ -89,7 +89,14 @@ class Cart
 
         $request->session()->put('cart',$cart);
     }
-
+    public function getCartModel() {
+        if (!Session::has('cart')) {
+          return view('products.shopping-cart');
+        }
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        return $cart;
+    }
 
 
 }
