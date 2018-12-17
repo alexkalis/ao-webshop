@@ -23,6 +23,8 @@
             --$detail->product goes from user controller gets it from order model and that gets it from orderdetails model
             --}}
         @foreach ($orderDetails as $detail)
+            <div style="background-color:white; margin:20px;">
+
                 <hr>
                 <h2>Dit is van bestelling: {{$detail->order_id}}</h2>
                 <br>
@@ -31,6 +33,8 @@
                 <br>
                 <h2> en dit was de price per product: {{$detail->product()->first()->price}}</h2>
                 {{-- <h2>{{$detail->quantity * $detail->product()->first()->price}}</h2> --}}
+            </div>
+
         @endforeach
           </ul>
         </div>

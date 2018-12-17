@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Products;
 use Auth;
 use Session;
+
 class Cart
 {
 
@@ -39,14 +40,7 @@ class Cart
           $storedItem = $this->items[$id];
         }
       }
-      /*
-      *the first one adds 1 and stores it into the array object qty
-      *the second one calculates the price and stores it into the array object price
-      *then the storeditem gets put into the public $items up above.
-      *the totalQty gets plus numbers from the storeditem.
-      *the += adds the item->price to the totalprice.
-      */
-
+      //this adds 1 of a specific product.
       $storedItem['qty']++;
       $storedItem['price'] = $item->price * $storedItem['qty'];
       $this->items[$id] = $storedItem;
@@ -64,7 +58,6 @@ class Cart
       $this->items[$id]['price'] -= $this->items[$id]['item']['price'];
       $this->totalQty--;
       $this->totalPrice-= $this->items[$id]['item']['price'];
-
       if($this->items[$id]['qty'] <= 0) {
         unset($this->items[$id]);
       }
@@ -82,6 +75,15 @@ class Cart
       unset($this->items[$id]);
     }
 
+
+    /*
+    *This code is placed here and not in the controller because using the session should be
+    *done in the model.
+    */
+
+    /*
+    *This calls the add function to add an item.
+    */
     public function addItemModel(Request $request, $id) {
         $product = Products::find($id);
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
@@ -90,6 +92,9 @@ class Cart
 
         $request->session()->put('cart',$cart);
     }
+    /*
+    *this functions gets the cart and returns it to the controller.
+    */
     public function getCartModel() {
         if (!Session::has('cart')) {
           return view('products.shopping-cart');
@@ -98,6 +103,7 @@ class Cart
         $cart = new Cart($oldCart);
         return $cart;
     }
+    /* this function reduces an item*/
     public function reduceItemModel($id) {
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
@@ -105,18 +111,17 @@ class Cart
         if ( count($cart->items) > 0) {
             Session::put('cart', $cart);
         } else {
-          Session::forget('cart');
+            Session::forget('cart');
         }
     }
     public function removeItemModel($id) {
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
         $cart->removeItem($id);
-
         if ( count($cart->items) > 0) {
             Session::put('cart', $cart);
         } else {
-          Session::forget('cart');
+            Session::forget('cart');
         }
     }
     public function toDatabaseModel() {

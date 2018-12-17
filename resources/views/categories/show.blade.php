@@ -9,6 +9,7 @@
                 <a href="{{ route('product.addToCart', ['id' =>$product->id]) }}" class="btn btn-success pull-right" role="button">Add to cart</a>
             <hr>
       @endforeach
+
     @else
       <h2>Er zijn geen producten beschikbaar.</h2>
     @endif

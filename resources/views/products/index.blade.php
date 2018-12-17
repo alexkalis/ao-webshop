@@ -15,4 +15,9 @@
         @else
           <p>No products found.</p>
       @endif
-    @endsection
+    {{-- <div class="alert">
+          @if (session()->has('cart'))
+              {{-- {{dd(session()->get('cart'))}} --}}
+          {{-- @endif --}}
+     </div>
+@endsection

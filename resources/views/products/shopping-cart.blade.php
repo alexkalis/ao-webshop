@@ -19,8 +19,9 @@ it shows what's in your shoppingCart.
                 <button class="btn btn-primary btn-xs dropdown-toggle" type="button" data-toggle="dropdown">Action <span class="caret"></span> </button>
                  <ul class="dropdown-menu">
                    <li><a href="{{route('product.reduceByOne', ['id' =>$product['item']['id']])}}">reduce by 1</a></li>
+                   {{-- {{dd($product)}} --}}
                    <li><a href="{{route('product.remove', ['id' =>$product['item']['id']])}}">reduce all</a></li>
-                   <li><a href="{{route('product.add', ['id' =>$product['item']['id']])}}">add by one</a></li>
+                   <li><a href="{{route('product.addToCart', ['id' =>$product['item']['id']])}}">add by one</a></li>
                  </ul>
               </div>
             </li>

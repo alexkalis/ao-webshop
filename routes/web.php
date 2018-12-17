@@ -19,6 +19,9 @@ Auth::routes();
 Route::get('/', 'PagesController@index');
 Route::get('/about', 'PagesController@about');
 Route::get('/contact', 'PagesController@contact');
+// Review controller
+Route::get('/new/review', 'ReviewController@createReview');
+Route::post('/new/review', 'ReviewController@createReview');
 
 /*
 * sign in and up pages routes
@@ -26,7 +29,7 @@ Route::get('/contact', 'PagesController@contact');
 *
 */
 
-Route::get('/add-to-cart/{id}', [
+Route::get('/add/{id}', [
   'uses' => 'ProductsController@addToCart',
   'as' => 'product.addToCart'
 ]);
@@ -49,10 +52,7 @@ Route::get('/remove/{id}', [
 /*
 *this gets the route to add an item to the shopping cart from the products with the specific id.
 */
-Route::get('/add/{id}', [
-  'uses' => 'ProductsController@addItem',
-  'as' => 'product.add'
-]);
+
 /*
 *this gets the route to show the shoppingcart in the shopping cart with the products that are put in the session/shoppingcart.
 */
