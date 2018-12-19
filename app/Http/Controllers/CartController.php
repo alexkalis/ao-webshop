@@ -20,22 +20,22 @@ class CartController extends Controller
         $cartItems = $cart->getItems();
         if ($cartItems == null) {
             $allItems = null;
-        } else{
-        foreach ($cartItems as $item) {
-            $allItems[] = Products::where(['id'=> $item['id']])->get();
-            $quantity[] = $item['qty'];
-            foreach ($allItems as $itemsQty) {
-                // dd($itemsQty);
-                    $price[] = $item['qty'] * $itemsQty[0]['price'];
-                }
-        } }
-        // dd($price);
-        $totalPrice = array_sum($price);
-        // dd($totalPrice);
-        $totalQty = array_sum($quantity);
-        // dd($totalQty);
+            $totalQty = null;
+        } else {
+            foreach ($cartItems as $item) {
+                $allItems[] = Products::find($item['id']);
+                $quantity[] = $item['qty'];
+                foreach ($allItems as $items) {
+                        $price[] = $item['qty'] * $items[0]['price'];
+                    }
+            }
+            // dd($allItems);
+            $totalPrice = array_sum($price);
+            $totalQty = array_sum($quantity);
+            // dd($totalQty);
+    }
 
-        return view('products.cart')->with(['items' => $allItems, 'quantity' => $cartItems,'totalQty' => $totalQty]);
+        return view('products.cart')->with(['items' => $allItems, 'quantity' => $cartItems, 'totalQty' => $totalQty]);
     }
     public function removeItem() {
         $cart = new Secondcart();
