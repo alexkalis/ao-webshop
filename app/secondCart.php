@@ -34,7 +34,8 @@ class secondCart
         echo "Hallo mensen";
     }
     public function getItems() {
-        echo "Hallo vrienden";
+        $items = session()->get('secondCart');
+        return $items;
     }
 
     public function cartToDatabase() {

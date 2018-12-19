@@ -15,13 +15,27 @@ class CartController extends Controller
         $cart->add($id);
         return redirect()->back();
     }
-    public function forget() {
-        $cart = new secondCart();
-        $cart->sessionForget();
-    }
     public function getCart(){
         $cart = new Secondcart();
-        $cart->getItems();
+        $cartItems = $cart->getItems();
+        if ($cartItems == null) {
+            $allItems = null;
+        } else{
+        foreach ($cartItems as $item) {
+            $allItems[] = Products::where(['id'=> $item['id']])->get();
+            $quantity[] = $item['qty'];
+            foreach ($allItems as $itemsQty) {
+                // dd($itemsQty);
+                    $price[] = $item['qty'] * $itemsQty[0]['price'];
+                }
+        } }
+        // dd($price);
+        $totalPrice = array_sum($price);
+        // dd($totalPrice);
+        $totalQty = array_sum($quantity);
+        // dd($totalQty);
+
+        return view('products.cart')->with(['items' => $allItems, 'quantity' => $cartItems,'totalQty' => $totalQty]);
     }
     public function removeItem() {
         $cart = new Secondcart();

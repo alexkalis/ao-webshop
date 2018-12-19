@@ -15,12 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/secondCartAdd', 'CartController@add');
-Route::get('/secondCartGet', 'CartController@getCart');
+// Route::get('/getCart', 'CartController@getCart');
 Route::get('/secondCartRemove', 'CartController@removeItem');
 Route::get('/secondCartRemoveOne', 'CartController@removeSingleItem');
 Route::get('/secondCartToDatabase', 'CartController@cartToDatabase');
-Route::get('/forget', 'CartController@forget');
-
 
 
 
@@ -65,8 +63,8 @@ Route::get('/remove/{id}', [
 /*
 *this gets the route to show the shoppingcart in the shopping cart with the products that are put in the session/shoppingcart.
 */
-Route::get('/shopping-cart', [
-  'uses' => 'ProductsController@getCart',
+Route::get('/getCart', [
+  'uses' => 'CartController@getCart',
   'as' => 'product.shoppingCart'
 ]);
 /*
