@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\secondCart;
+use Auth;
+use App\Products;
+use App\Review;
+
+class CartController extends Controller
+{
+
+    public function add($id){
+        $cart = new Secondcart();
+        // $product = Products::find($id);
+        // $text = ['item' => $product, 'price' => $product->price];
+        $cart->add($id);
+        $session = $cart->display();
+        $totalQty = count($session);
+
+        // dd($session);
+        return view('products.secondCart')->with(['session' => $session, 'totalQty' => $totalQty]);
+
+    }
+    public function addSecond(){
+        $cart = new Secondcart();
+        $text = 1;
+        $cart->add($text);
+        $cart->display();
+    }
+    public function getCart(){
+        $cart = new Secondcart();
+        $session = $cart->display();
+        $totalQty = count($session);
+        // dd($session);
+        return view('products.secondCart')->with(['session' => $session, 'totalQty' => $totalQty]);
+
+    }
+}

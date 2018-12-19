@@ -10,6 +10,8 @@ use App\Review;
 
 class ProductsController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      *
@@ -29,11 +31,11 @@ class ProductsController extends Controller
     {
         $product = Products::find($id);
         $user = Auth::user();
-        $review = Review::where(['product_id' => $id ])->get();
-        if (!$review->first()) {
-            $review = null;
-        }
-      return view('products.show', ['product' => $product, 'review' => $review]);
+        // $review = Review::where(['product_id' => $id ])->get();
+        // if (!$review->first()) {
+        //     $review = null;
+        // }
+      return view('products.show', ['product' => $product]);
     }
 
     /*
@@ -74,7 +76,8 @@ class ProductsController extends Controller
       {
          $cart = new Cart;
          $cartInventory = $cart->getCartModel();
-         return view('products.shopping-cart', ['products' => $cartInventory->items, 'totalPrice' => $cartInventory->totalPrice, 'totalQty' => $cartInventory->totalQty]);
+
+         return view('products.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cartInventory->totalPrice, 'totalQty' => $cartInventory->totalQty]);
     }
     /*
     *Push the cart to the database using the toDatabaseModel function.

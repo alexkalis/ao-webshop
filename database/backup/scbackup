@@ -1,0 +1,80 @@
+<?php
+
+namespace App;
+
+use Illuminate\Http\Request;
+
+use Session;
+use App\Products;
+class secondCart
+{
+    protected $items = [];
+    protected $totalQty;
+    protected $totalPrice;
+
+    public function __construct() {
+        // $session = session()->get('secondCart');
+        // // dd($session);
+        // foreach ($session as $key) {
+        //     if ($session) {
+        //         dd($key['item']);
+        //         $key['item'];
+        //     }
+        // }
+
+    }
+
+    public function add($id) {
+        $session = session()->get('secondCart');
+        $product = Products::find($id);
+        $storedItem = ['qty' => 0, 'item' => $product];
+      //     if (array_key_exists($id, $this->items)) {
+      //       $storedItem = $this->items[$id];
+      // }
+      // dd($session);
+
+        //this adds 1 of a specific product.
+        $storedItem['qty']++;
+        // $storedItem['price'] = $product->price * $storedItem['qty'];
+        $this->items[$id] = $storedItem;
+        // $this->totalQty++;
+        // $this->totalPrice += $product->price;
+        // dd($this->items);
+        session::push('secondCart', $this->items);
+        // dd($session);
+        // if ($session['item']['id'] == $id) {
+        //     dd("hfa");
+        // }
+
+        // $this->totalQty++;
+        // $this->totalPrice  += $product->price;
+        // $this->items = $text;
+    //     $session = session()->get('secondCart');
+    //    if (session()->has('secondCart')) {
+            // dd("jhafah");
+            // dd($session);
+                // if ($session['item']['id'] == $storedItem['item']) {
+                //     dd("hall");
+
+                // }
+    // }
+    // array_push($this->items, $storedItem);
+        // $cart = $this->items;
+
+        // dd($storedItem);
+        // $this->items[$id]['qty']++;
+        // dd($this->items[$id]);
+        // session()->forget('secondCart');
+        // dd($this->totalQty);
+        // dd($this->items);
+        // session(['cart2' => $this->items]);
+        echo("Hallo allemaal<br>");
+    }
+    public function display() {
+        echo("geweldig");
+        $session = session()->get('secondCart');
+        dd($session);
+        return $session;
+        // dd($session);
+    }
+}

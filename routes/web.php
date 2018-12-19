@@ -14,6 +14,15 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/secondCartAdd', 'CartController@add');
+Route::get('/secondCartGet', 'CartController@getCart');
+Route::get('/secondCartRemove', 'CartController@removeItem');
+Route::get('/secondCartRemoveOne', 'CartController@removeSingleItem');
+Route::get('/secondCartToDatabase', 'CartController@cartToDatabase');
+Route::get('/forget', 'CartController@forget');
+
+
+
 
 Auth::routes();
 Route::get('/', 'PagesController@index');
@@ -29,8 +38,8 @@ Route::post('/new/review', 'ReviewController@createReview');
 *
 */
 
-Route::get('/add/{id}', [
-  'uses' => 'ProductsController@addToCart',
+Route::get('/secondCartAdd/{id}', [
+  'uses' => 'CartController@add',
   'as' => 'product.addToCart'
 ]);
 

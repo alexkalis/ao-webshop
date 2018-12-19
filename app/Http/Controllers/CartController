@@ -1,0 +1,13 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Cart;
+use Auth;
+use App\Products;
+use App\Review;
+
+class ProductsController extends Controller
+{
+}

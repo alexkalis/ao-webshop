@@ -1,0 +1,17 @@
+<?php
+
+namespace App;
+
+use Illuminate\Http\Request;
+
+
+class secondCart
+{
+    private $items;
+    private $totalQty;
+    private $totalPrice;
+
+    public function add() {
+        dd("Hallo allemaal");
+    }
+}

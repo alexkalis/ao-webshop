@@ -101,6 +101,7 @@ class Cart
         }
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
+        dd($cart);
         return $cart;
     }
     /* this function reduces an item*/
