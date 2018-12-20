@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/secondCartAdd', 'CartController@add');
-// Route::get('/getCart', 'CartController@getCart');
+Route::get('/getPrice', 'CartController@getPrice');
 Route::get('/secondCartRemove', 'CartController@removeItem');
 Route::get('/secondCartRemoveOne', 'CartController@removeSingleItem');
 Route::get('/secondCartToDatabase', 'CartController@cartToDatabase');

@@ -18,6 +18,8 @@ class CartController extends Controller
     public function getCart(){
         $cart = new Secondcart();
         $cartItems = $cart->getItems();
+        $totalPrice = $cart->getTotalPrice();
+        // dd($totalPrice);
         if ($cartItems == null) {
             $allItems = null;
             $totalQty = null;
@@ -25,17 +27,13 @@ class CartController extends Controller
             foreach ($cartItems as $item) {
                 $allItems[] = Products::find($item['id']);
                 $quantity[] = $item['qty'];
-                foreach ($allItems as $items) {
-                        $price[] = $item['qty'] * $items[0]['price'];
-                    }
-            }
             // dd($allItems);
-            $totalPrice = array_sum($price);
+        }
             $totalQty = array_sum($quantity);
             // dd($totalQty);
     }
 
-        return view('products.cart')->with(['items' => $allItems, 'quantity' => $cartItems, 'totalQty' => $totalQty]);
+        return view('products.cart')->with(['items' => $allItems, 'quantity' => $cartItems, 'totalQty' => $totalQty, 'totalPrice' => $totalPrice]);
     }
     public function removeItem() {
         $cart = new Secondcart();
@@ -48,5 +46,9 @@ class CartController extends Controller
     public function cartToDatabase() {
         $cart = new Secondcart();
         $cart->cartToDatabase();
+    }
+    public function getPrice() {
+        $cart = new Secondcart();
+        $cart->getTotalPrice();
     }
 }

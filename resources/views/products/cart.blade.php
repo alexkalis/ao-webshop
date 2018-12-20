@@ -21,7 +21,7 @@
               </ul>
             @endforeach
         <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-          <strong>totale prijs: € </strong>
+          <strong>totale prijs: € {{$totalPrice}}</strong>
           <strong>totale producten: {{$totalQty}}</strong>
       </div>
     @else
