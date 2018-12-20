@@ -19,18 +19,12 @@ class CartController extends Controller
         $cart = new Secondcart();
         $cartItems = $cart->getItems();
         // dd($cartItems);
-        if ($cartItems[0] == null) {
-            $totalPrice = null;
-            $totalQty = null;
-            $allItems = null;
-            $quantity = null;
-        } else {
         $totalPrice = $cartItems[1][0];
         $totalQty = $cartItems[2];
-        $allItems = $cartItems[1][1];
+        $items = $cartItems[1][1];
         $quantity = $cartItems[0];
-    }
-        return view('products.cart')->with(['items' => $allItems, 'totalQty' => $totalQty, 'totalPrice' => $totalPrice, 'quantity' => $quantity]);
+
+        return view('products.cart')->with(['items' => $items, 'totalQty' => $totalQty, 'totalPrice' => $totalPrice, 'quantity' => $quantity]);
     }
     public function removeItem() {
         $cart = new Secondcart();
