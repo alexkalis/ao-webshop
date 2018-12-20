@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
-    @if (session()->has('secondCart'))
-
+    {{-- @if (session()->has('secondCart')) --}}
+    @if ($items)
         <h2>Dit is de inhoud van het winkelwagentje:</h2>
         @foreach ($items as $item )
                 <ul class="list-group">
@@ -16,6 +16,7 @@
                             <span class="label label-success">Aantal: {{$qty['qty']}}</span>
                         @endif
                     @endforeach
+
                         {{-- <input name="qty" value="{{$qty['qty']}}"></input> --}}
                   </li>
               </ul>

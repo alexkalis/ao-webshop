@@ -40,20 +40,35 @@ class secondCart
         echo "Hallo mensen";
     }
     public function getItems() {
-        $items = $this->items;
+        $items[] = $this->items;
+        $items[] = $this->getTotalPrice();
+        $items[] = $this->getTotalQuantity();
         return $items;
+
     }
     public function getTotalPrice() {
-        $items = $this->items;
-        // dd($this->items);
-        foreach ($items as $item) {
+        if ($this->items == null) {
+            return;
+        } else {
+        foreach ($this->items as $item) {
             $product = Products::find($item['id']);
             $totalItems[] = $product;
             $price[] = $item['qty'] * $product->price;
-            // dd($price);
         }
         $totalPrice = array_sum($price);
-        return $totalPrice;
+        return array($totalPrice, $totalItems);
+    }
+    }
+    public function getTotalQuantity() {
+        if ($this->items == null) {
+            return;
+        } else {
+            foreach($this->items as $item) {
+                $quantity[] = $item['qty'];
+            }
+            $totalQty = array_sum($quantity);
+            return $totalQty;
+        }
     }
 
     public function cartToDatabase() {
