@@ -44,7 +44,6 @@ class secondCart
         $items[] = $this->getTotalPrice();
         $items[] = $this->getTotalQuantity();
         return $items;
-
     }
     public function getTotalPrice() {
         if ($this->items == null) {
