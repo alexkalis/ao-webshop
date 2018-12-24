@@ -17,10 +17,8 @@ Route::get('/', function () {
 Route::get('/secondCartAdd', 'CartController@add');
 Route::get('/getPrice', 'CartController@getPrice');
 Route::get('/secondCartRemove', 'CartController@removeItem');
-Route::get('/secondCartRemoveOne', 'CartController@removeSingleItem');
+Route::get('/secondCartRemoveOne/{id}', 'CartController@removeSingleItem');
 Route::get('/secondCartToDatabase', 'CartController@cartToDatabase');
-
-
 
 Auth::routes();
 Route::get('/', 'PagesController@index');
@@ -46,14 +44,14 @@ Route::get('/secondCartAdd/{id}', [
 *
 */
 Route::get('/reduce/{id}', [
-  'uses' => 'ProductsController@reduceByOne',
+  'uses' => 'CartController@reduceByOne',
   'as' => 'product.reduceByOne'
 ]);
 /*
 *this gets the route to remove an item from the shopping cart with an specific id.
 */
 Route::get('/remove/{id}', [
-  'uses' => 'ProductsController@removeItem',
+  'uses' => 'CartController@removeItem',
   'as' => 'product.remove'
 ]);
 /*
@@ -71,8 +69,8 @@ Route::get('/getCart', [
 *this gets the route to put the order in to the database and
 */
 Route::get('/to-database', [
-  'uses' =>'ProductsController@toDatabase',
-  'as' => 'product.added',
+  'uses' =>'CartController@cartToDatabase',
+  'as' => 'product.post',
   'middleware' => 'auth'
 ]);
 

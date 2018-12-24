@@ -18,22 +18,23 @@ class CartController extends Controller
     public function getCart(){
         $cart = new Secondcart();
         $cartItems = $cart->getItems();
-        return view('products.cart')->with(['cartItems' => $cartItems]);
+        $total = $cart->getTotalCartDetails();
+        return view('products.cart')->with(['cartItems' => $cartItems, 'total' => $total]);
     }
-    public function removeItem() {
+
+    public function removeItem($id) {
         $cart = new Secondcart();
-        $cart->removeItem();
+        $cart->removeItem($id);
+        return redirect()->back();
     }
-    public function removeSingleItem() {
+    public function reduceByOne($id) {
         $cart = new Secondcart();
-        $cart->removeSingleItem();
+        $cart->removeSingleItem($id);
+        return redirect()->back();
     }
     public function cartToDatabase() {
         $cart = new Secondcart();
         $cart->cartToDatabase();
-    }
-    public function getPrice() {
-        $cart = new Secondcart();
-        $cart->getTotalPrice();
+        return redirect()->back();
     }
 }

@@ -3,7 +3,9 @@
 namespace App;
 
 use Illuminate\Http\Request;
-
+use App\Order;
+use App\OrderDetails;
+use Auth;
 
 class secondCart
 {
@@ -33,44 +35,52 @@ class secondCart
         // dd($session);
     }
 
-    public function removeItem() {
-        echo "Hallo iedereen";
-    }
-    public function removeSingleItem() {
-        echo "Hallo mensen";
-    }
-    public function getItems() {
-        $items[] = $this->items;
-        $items[] = $this->getTotalPrice();
-        $items[] = $this->getTotalQuantity();
-        return $items;
-    }
-    public function getTotalPrice() {
-        if ($this->items == null) {
-            return;
-        } else {
-        foreach ($this->items as $item) {
-            $product = Products::find($item['id']);
-            $totalItems[] = $product;
-            $price[] = $item['qty'] * $product->price;
-        }
-        $totalPrice = array_sum($price);
-        return array($totalPrice, $totalItems);
-    }
-    }
-    public function getTotalQuantity() {
-        if ($this->items == null) {
-            return;
-        } else {
-            foreach($this->items as $item) {
-                $quantity[] = $item['qty'];
-            }
-            $totalQty = array_sum($quantity);
-            return $totalQty;
+    public function removeItem($id) {
+        foreach ($this->items as $storedItem) {
+        if ($storedItem['id'] == $id){
+            session()->forget('secondCart.'.$storedItem['id']);
+          }
         }
     }
 
-    public function cartToDatabase() {
-        echo "Hallo volk";
+    public function removeSingleItem($id) {
+        foreach ($this->items as $storedItem) {
+        if ($storedItem['id'] == $id){
+          $storedItem['qty']--;
+          if($storedItem['qty'] == 0){
+            session()->forget('secondCart.'.$storedItem['id']);
+            return;
+          }
+          $this->items[$id] = $storedItem;
+          session()->put('secondCart', $this->items);
+        }
+      }
     }
+    public function getItems() {
+        if ($this->items == null) {
+            return null;
+        } else {
+        foreach ($this->items as $item) {
+            $product = Products::find($item['id']);
+            $items[] = $product;
+        }
+        return array($items, $this->items);
+    }
+}
+    public function getTotalCartDetails() {
+        if ($this->items == null) {
+            return null;
+        } else {
+            foreach($this->items as $item) {
+                $product = Products::find($item['id']);
+                $quantity[] = $item['qty'];
+                $price[] = $item['qty'] * $product->price;
+            }
+            $totalQty = array_sum($quantity);
+            $totalPrice = array_sum($price);
+            return array($totalQty, $totalPrice);
+        }
+    }
+
+
 }
