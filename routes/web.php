@@ -68,11 +68,7 @@ Route::get('/getCart', [
 /*
 *this gets the route to put the order in to the database and
 */
-Route::get('/to-database', [
-  'uses' =>'CartController@cartToDatabase',
-  'as' => 'product.post',
-  'middleware' => 'auth'
-]);
+
 
 
 
@@ -107,6 +103,11 @@ Route::group(['prefix' =>'user'], function() {
   Route::get('/logout', [
       'uses' => 'UserController@getLogout',
       'as' => 'user.logout'
+    ]);
+    Route::get('/to-database', [
+      'uses' =>'CartController@cartToDatabase',
+      'as' => 'product.post',
+      'middleware' => 'auth'
     ]);
   });
 Route::get('/added', [

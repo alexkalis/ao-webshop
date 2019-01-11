@@ -37,9 +37,9 @@ class secondCart
 
     public function removeItem($id) {
         foreach ($this->items as $storedItem) {
-        if ($storedItem['id'] == $id){
-            session()->forget('secondCart.'.$storedItem['id']);
-          }
+            if ($storedItem['id'] == $id){
+                session()->forget('secondCart.'.$storedItem['id']);
+            }
         }
     }
 
@@ -49,7 +49,7 @@ class secondCart
           $storedItem['qty']--;
           if($storedItem['qty'] == 0){
             session()->forget('secondCart.'.$storedItem['id']);
-            return;
+            break;
           }
           $this->items[$id] = $storedItem;
           session()->put('secondCart', $this->items);
@@ -82,5 +82,17 @@ class secondCart
         }
     }
 
-
+    public function cartToDatabase() {
+        $order = Order::create([
+          'user_id' => Auth::user()->id,
+        ]);
+        foreach ($this->items as $storedItem) {
+          OrderDetails::create([
+            'order_id' => $order->id,
+            'product_id' => $storedItem['id'],
+            'quantity' =>$storedItem['qty'],
+          ]);
+        }
+        Session()->forget('secondCart');
+    }
 }

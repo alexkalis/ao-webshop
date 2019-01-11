@@ -35,6 +35,6 @@ class CartController extends Controller
     public function cartToDatabase() {
         $cart = new Secondcart();
         $cart->cartToDatabase();
-        return redirect()->back();
+        return redirect('profile');
     }
 }

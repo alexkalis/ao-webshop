@@ -2,6 +2,7 @@
 @section('content')
     {{-- @if (session()->has('secondCart')) --}}
     @if ($cartItems[0])
+        {{-- {{dd($cartItems)}} --}}
         <h2>Dit is de inhoud van het winkelwagentje:</h2>
         @foreach ($cartItems[0] as $item )
                 <ul class="list-group">
@@ -33,6 +34,7 @@
           <strong>totale prijs: € {{$total[1]}}</strong>
           <strong>totale producten: {{$total[0]}}</strong>
       </div>
+      <a href="{{route('product.post')}}">   <button type="button" class="btn btn-success" name="button">Bestel</button></a>
 
     @else
         <h2>Er zit niks in het winkelwagentje</h2>

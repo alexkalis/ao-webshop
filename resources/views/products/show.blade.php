@@ -12,7 +12,7 @@
   <hr>
   </hr>
   <hr>
-  @if (Auth::user())
+  {{-- @if (Auth::user())
 
      @if ($review)
          <div class=" navbar-expand-md navbar-light navbar-laravel panel panel-default">
@@ -50,7 +50,7 @@
               <button type="reset" class="btn btn-default btn-md">Leegmaken</button>
       </form>
   </div>
-@endif
-@endif
+@endif --}}
+{{-- @endif --}}
 
 @endsection

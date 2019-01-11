@@ -79,7 +79,6 @@ class UserController extends Controller
       $orders = Auth::user()->orders;
       $orderDetails = [];
       foreach ($orders as $order) {
-        // dd($orders);
         foreach ($order->details()->get() as $ord) {
           $orderDetails[] = $ord;
         }
